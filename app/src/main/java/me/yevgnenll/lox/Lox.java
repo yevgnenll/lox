@@ -12,7 +12,7 @@ public class Lox {
 
     private static boolean hadError = false;
     private static boolean hadRuntimeError = false;
-    private static final Interpretor interpretor = new Interpretor();
+    private static final Interpreter INTERPRETER = new Interpreter();
 
     public static void main(String[] args) throws IOException {
         if (args.length > 1) {
@@ -60,7 +60,7 @@ public class Lox {
 
         if (hadError) return;
 
-        interpretor.interpret(expression);
+        INTERPRETER.interpret(expression);
     }
 
     static void error(int line, String message) {

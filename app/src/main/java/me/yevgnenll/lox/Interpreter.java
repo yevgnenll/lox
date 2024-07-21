@@ -1,6 +1,6 @@
 package me.yevgnenll.lox;
 
-public class Interpretor implements Expr.Visitor<Object> {
+public class Interpreter implements Expr.Visitor<Object> {
 
     void interpret(Expr expression) {
         try {
