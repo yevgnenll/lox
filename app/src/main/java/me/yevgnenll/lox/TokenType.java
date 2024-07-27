@@ -14,6 +14,7 @@ public enum TokenType {
     SLASH,
     STAR,
 
+    MOD,
     BANG,
     BANG_EQUAL,
     EQUAL,
