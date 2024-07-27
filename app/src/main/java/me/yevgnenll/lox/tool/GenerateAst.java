@@ -32,7 +32,13 @@ public class GenerateAst {
 */
 //> Statements and State var-expr
                 "Unary    : Token operator, Expr right",
-                "Variable : Token name"
+                "Variable : Token name",
+                "If       : Expr condition, Stmt thenBranch, Stmt elseBranch"
+        ));
+
+        defineAst(outputDir, "Stmt", Arrays.asList(
+                "Expression : Expr expression",
+                "Print      : Expr expression"
         ));
     }
 
