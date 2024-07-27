@@ -79,4 +79,9 @@ public class AstPrinter implements Expr.Visitor {
     public Object visitVariableExpr(Expr.Variable expr) {
         return null;
     }
+
+    @Override
+    public Object visitIfExpr(Expr.If expr) {
+        return null;
+    }
 }
