@@ -56,7 +56,7 @@ public class Lox {
         }
 
         Parser parser = new Parser(tokens);
-        Expr expression = parser.parse();
+        List<Stmt> expression = parser.parse();
 
         if (hadError) return;
 

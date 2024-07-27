@@ -1,5 +1,6 @@
 package me.yevgnenll.lox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static me.yevgnenll.lox.TokenType.*;
@@ -14,12 +15,30 @@ public class Parser {
         this.tokens = tokens;
     }
 
-    Expr parse() {
-        try {
-            return expression();
-        } catch (ParserError error) {
-            return null;
+    // Program is list of statements
+    List<Stmt> parse() {
+        List<Stmt> statements = new ArrayList<>();
+        while (!isAtEnd()) {
+            statements.add(statement());
         }
+        return statements;
+    }
+
+    private Stmt statement() {
+        if (match(PRINT)) return printStatement();
+        return expressionStatement();
+    }
+
+    private Stmt expressionStatement() {
+        Expr expr = expression();
+        consume(SEMICOLON, "Expect ';' after expression.");
+        return new Stmt.Expression(expr);
+    }
+
+    private Stmt printStatement() {
+        Expr value = expression();
+        consume(SEMICOLON, "Expect ';' after value.");
+        return new Stmt.Print(value);
     }
 
     private Expr expression() {
