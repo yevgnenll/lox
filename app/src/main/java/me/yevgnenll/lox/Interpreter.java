@@ -9,7 +9,6 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
             for (Stmt statement : statements) {
                 execute(statement);
             }
-
         } catch (RuntimeError error) {
             Lox.runtimeError(error);
         }
@@ -97,6 +96,10 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
             case BANG_EQUAL -> {
                 return !isEqual(left, right);
             }
+            case MOD-> {
+                checkNumberOperands(expr.operator, left, right);
+                return (double) left % (double) right;
+            }
         }
         // unreachable
         return null;
@@ -180,6 +183,11 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     @Override
     public Object visitVariableExpr(Expr.Variable expr) {
+        return null;
+    }
+
+    @Override
+    public Object visitIfExpr(Expr.If expr) {
         return null;
     }
 
