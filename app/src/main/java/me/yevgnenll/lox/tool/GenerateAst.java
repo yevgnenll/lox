@@ -54,7 +54,7 @@ public class GenerateAst {
         writer.println();
         writer.println("import java.util.List;");
         writer.println();
-        writer.println("abstract class " + baseName + "{");
+        writer.println("abstract class " + baseName + " {");
 
         defineVisitor(writer, baseName, types);
 
@@ -78,14 +78,14 @@ public class GenerateAst {
 
         for (String type : types) {
             String typeName = type.split(":")[0].trim();
-            writer.println("    R visit" + typeName + baseName + "(" + typeName + " " + baseName.toLowerCase() + ");");
+            writer.println("        R visit" + typeName + baseName + "(" + typeName + " " + baseName.toLowerCase() + ");");
         }
 
         writer.println("    }");
     }
 
     private static void defineType(PrintWriter writer, String baseName, String className, String fieldsList) {
-        writer.println("   static class " + className + " extends " + baseName + "{");
+        writer.println("   static class " + className + " extends " + baseName + " {");
 
         // constructor
         writer.println("    " + className + "(" + fieldsList + ") {");
@@ -103,12 +103,12 @@ public class GenerateAst {
         writer.println();
         // visitor pattern
         writer.println();
-        writer.println("    @Override");
-        writer.println("    <R> R accept(Visitor<R> visitor) {");
+        writer.println("     @Override");
+        writer.println("     <R> R accept(Visitor<R> visitor) {");
         writer.println("        return visitor.visit" + className + baseName + "(this);");
         writer.println("     }");
 
-        writer.println(" // fields");
+        writer.println("     // fields");
         // fields
         for (String field : fields) {
             writer.println("     final " + field + ";");
