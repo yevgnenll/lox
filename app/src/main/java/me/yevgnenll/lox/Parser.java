@@ -80,7 +80,7 @@ public class Parser {
 
     private Expr factor() {
         Expr expr = unary();
-        while (match(SLASH, STAR)) {
+        while (match(SLASH, STAR, MOD)) {
             Token operator = previous();
             Expr right = unary();
             expr = new Expr.Binary(expr, operator, right);
@@ -120,6 +120,7 @@ public class Parser {
         throw error(peek(), message);
     }
 
+    // interpreter 모드에서 error 발생하면 모두 멈춰버리는데 이거 해결책 필요함.
     private ParserError error(Token token, String message) {
         Lox.error(token, message);
         return new ParserError();
